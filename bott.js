@@ -1,3 +1,18 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const port = 3000; // You can change the port if needed
+
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
+
+// Example route
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const { DisTube } = require('distube');
 const { SoundCloudPlugin } = require('@distube/soundcloud');
@@ -35,10 +50,10 @@ class MainClient extends Client {
         this.distube = new DisTube(client, {
             searchSongs: 0, /// ARAMA MODUNU ETKİNLEŞTİRMEK İÇİN 5'E AYARLAYIN!
             searchCooldown: 30,
-            leaveOnEmpty: true,
+            leaveOnEmpty: false,
             emptyCooldown: 60,
-            leaveOnFinish: true,
-            leaveOnStop: true,
+            leaveOnFinish: false,
+            leaveOnStop: false,
             plugins: [
                 new SoundCloudPlugin(),
                 new SpotifyPlugin({
